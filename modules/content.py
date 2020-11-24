@@ -15,7 +15,7 @@ class Content:
         '''Runs the Content Validator and returns failures'''
         error = self.looker_client.content_validation().content_with_errors
         looks_error, dash_errors = [], []
-        for i in enumerate(error):
+        for i in range(0, len(error)):
             error_msg = re.sub(r'\[ContentValidationError\(message=', '', str(error[i].errors))
             error_msg = re.sub(r'\, field_name=.*', '', error_msg)
             if error[i].look:

@@ -16,7 +16,7 @@ class Projects:
         '''Returns the list of projects'''
         my_projects = self.looker_client.all_projects(fields='id,name')
         project_ids = []
-        for i in enumerate(my_projects):
+        for i in range(0, len(my_projects)):
             project_ids.append(my_projects[i].id)
         return project_ids
 
