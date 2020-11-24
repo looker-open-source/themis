@@ -24,7 +24,7 @@ class Projects:
         '''Returns LookML validation errors'''
         validation = self.looker_client.validate_project(project_id)
         if validation.errors:
-            for i in range(0, len(validation.errors)):
+            for i in enumerate(validation.errors):
                 Projects.lookmlErrorCount += 1
                 severity = validation.errors[i].severity
                 message = validation.errors[i].message
@@ -42,7 +42,7 @@ class Projects:
         git_tests = []
 
         # exclude models from marketplace
-        if not "marketplace_" in str(project_id):
+        if "marketplace_" not in str(project_id):
             all_git_tests = self.looker_client.all_git_connection_tests(project_id)
             for test_id in all_git_tests:
                 one_test = self.looker_client.run_git_connection_test(project_id, test_id.id)

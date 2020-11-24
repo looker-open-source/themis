@@ -50,6 +50,3 @@ def send_report_out(content):
             print(response.headers)
     except Exception as e:
         print(e)
-
-    return
-

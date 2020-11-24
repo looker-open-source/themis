@@ -1,6 +1,5 @@
 import time
 import os, os.path
-from os import path
 from requests.exceptions import ReadTimeout
 import setup
 
@@ -56,43 +55,6 @@ my_project = Projects(looker_client)
 count_all_projects = my_project.count_all_projects()
 
 all_projects = my_project.all_projects()  # to reuse throughout code
-
-# Heavy for the instance, validation of all projects one by one
-# By default this is set to not validate LookML for projects
-FULL_LOOKML_VALIDATION = os.environ.get('FULL_LOOKML_VALIDATION', False)
-
-# if FULL_LOOKML_VALIDATION:
-#     for project in all_projects:
-#         try:
-#             my_project.validate_lookml(project)
-#         except ReadTimeout as e:
-#             print("Project \'{}\' took too long to validate.".format(project))
-#             print("{} --- {}".format(type(e), e))
-#             pass
-
-#     print('{} total lookml errors.'.format(my_project.count_lookml_errors()))
-
-# Testing the git connection for the repos associated to the projects
-#for project in all_projects:
-#    try:
-#        if project:
-#            print(my_project.run_git_test(project))
-#    except Exception as e:
-#        print("Project \'{}\' took too long to validate git tests.".format(project))
-#        print("{} --- {}".format(type(e), e))
-#    proj_has_tests = my_project.get_lookml_test(project)
-#    if proj_has_tests:
-#        print(my_project.run_lookml_test(project))
-
-#    try:
-#        if project:
-#            print(my_project.validate_lookml(project))
-#    except Exception as e:
-#        print("Project \'{}\' failed to validate LookML.".format(project))
-#        print("{} --- {}".format(type(e), e))
-
-#stale_branches = my_project.get_stale_branches()
-print(">>> Checked: {} in {} sec so far".format(Projects.__doc__, round(time.time()-start_time, 4)))
 ####################################################################
 
 # CONTENT
@@ -190,5 +152,3 @@ send_report_out(content=content_email)
 print(">>> Sent email out {} sec so far".format(round(time.time()-start_time, 4)))
 
 print('>>> Completed process in {} seconds '.format(round(time.time()-start_time, 4)))
-
-

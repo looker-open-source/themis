@@ -72,5 +72,3 @@ class Connectivity:
                                                                                                   elem.model_name,
                                                                                                   elem.trigger_error))
         return group_errors
-
-

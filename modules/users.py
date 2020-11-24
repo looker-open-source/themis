@@ -57,5 +57,3 @@ class Users:
         users_query = self.looker_client.create_query(body)
         inactive_users = self.looker_client.run_query(users_query.id, result_format='json')
         return len(inactive_users)
-
-

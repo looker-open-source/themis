@@ -28,7 +28,6 @@ class Content:
                                                                                           error_msg))
             else:
               print("Did not account for content {}".format(error[i]))
-              pass
 
         looks_error = list(set(looks_error)) # set to remove duplicates
         total_look_errors = len(looks_error)
@@ -39,4 +38,3 @@ class Content:
     def validate_themes(self):
         '''Confirms existing themes are valid'''
         # todo https://company.looker.com:19999/api-docs/index.html#!/4.0/Theme/validate_theme
-

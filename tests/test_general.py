@@ -50,5 +50,3 @@ class GeneralTestCase(unittest.TestCase):
         input_array = []
         self.assertTrue(len(format_output(input_array)) == 1, msg="Issue formatting empty results of Looker functions") 
         self.assertTrue(format_output(input_array)[0] == 'No issues found.', msg="Issue formatting empty results of Looker functions")
-
-

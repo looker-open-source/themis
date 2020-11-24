@@ -95,4 +95,3 @@ class Performance:
 			for k,v in Counter(results).items():
 				diff_node_version.append("{} nodes found on version {}".format(v,k))
 			return diff_node_version
-
