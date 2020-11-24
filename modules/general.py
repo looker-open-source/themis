@@ -1,5 +1,6 @@
 import configparser
 import re
+import os
 from os import path
 
 def get_looker_version(looker_client):
