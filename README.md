@@ -1,5 +1,5 @@
 # Themis
-![Build Status](https://github.com/actions/looker-open-source/themis/workflows/.github/workflows/Python%20Themis%20testing/badge.svg)
+[![Build Status](https://github.com/actions/looker-open-source/themis/workflows/.github/workflows/Python%20Themis%20testing/badge.svg)](https://github.com/looker-open-source/themis/actions)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 [![CodeFactor](https://www.codefactor.io/repository/github/looker-open-source/themis/badge)](https://www.codefactor.io/repository/github/looker-open-source/themis)
 
