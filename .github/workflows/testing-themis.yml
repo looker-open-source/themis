@@ -19,8 +19,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest
+        pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
+      env:
+        SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+        EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+        LOOKERSDK_BASE_URL: ${{ secrets.LOOKERSDK_BASE_URL }}
+        LOOKERSDK_CLIENT_ID: ${{ secrets.LOOKERSDK_CLIENT_ID }}
+        LOOKERSDK_CLIENT_SECRET: ${{secrets.LOOKERSDK_CLIENT_SECRET }}
       run: |
         pytest
