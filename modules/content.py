@@ -15,7 +15,7 @@ class Content:
         '''Runs the Content Validator and returns failures'''
         error = self.looker_client.content_validation().content_with_errors
         looks_error, dash_errors = [], []
-        for i in range(0, len(error)):
+        for i in enumerate(error):
             error_msg = re.sub(r'\[ContentValidationError\(message=', '', str(error[i].errors))
             error_msg = re.sub(r'\, field_name=.*', '', error_msg)
             if error[i].look:
@@ -28,7 +28,6 @@ class Content:
                                                                                           error_msg))
             else:
               print("Did not account for content {}".format(error[i]))
-              pass
 
         looks_error = list(set(looks_error)) # set to remove duplicates
         total_look_errors = len(looks_error)
@@ -39,4 +38,3 @@ class Content:
     def validate_themes(self):
         '''Confirms existing themes are valid'''
         # todo https://company.looker.com:19999/api-docs/index.html#!/4.0/Theme/validate_theme
-

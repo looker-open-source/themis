@@ -40,5 +40,3 @@ class SendgridTestCase(unittest.TestCase):
             ) 
         response = self.__class__.sendgrid_client.send(message)
         self.assertEqual(response.status_code, 202, msg="Sending Email to many Recipients Failed")
-
-

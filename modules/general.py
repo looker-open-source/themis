@@ -1,6 +1,5 @@
 import configparser
 import re
-import os.path 
 from os import path
 
 def get_looker_version(looker_client):
@@ -39,4 +38,3 @@ def format_output(function_results):
         return formatted_results   
     else:
         return function_results
-

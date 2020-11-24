@@ -39,4 +39,3 @@ class LookerSDKTestCase(unittest.TestCase):
     def test_sendgrid_env_var(self):
         '''Tests if SendGrid API key exists'''
         self.assertIsNotNone(self.__class__.sg_key, msg="SendGrid API Key Not Found or Wrong Format")
-    

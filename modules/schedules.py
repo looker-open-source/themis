@@ -89,4 +89,3 @@ class Schedules:
         build_30_60 = json.loads(pdt_build_times)[0]['build_30_60'] 
         build_more_60 = json.loads(pdt_build_times)[0]['build_more_60']
         return int(build_less_30 or 0), int(build_30_60 or 0), int(build_more_60 or 0)
-

@@ -1,6 +1,5 @@
 import time
 import os, os.path
-from os import path
 from requests.exceptions import ReadTimeout
 import setup
 
@@ -153,5 +152,3 @@ send_report_out(content=content_email)
 print(">>> Sent email out {} sec so far".format(round(time.time()-start_time, 4)))
 
 print('>>> Completed process in {} seconds '.format(round(time.time()-start_time, 4)))
-
-
