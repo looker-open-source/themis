@@ -1,7 +1,7 @@
 # Themis
-[![Build Status](https://travis-ci.com/looker-open-source/Themis.svg?token=9AQVD3a9aH85bqC19gfz&branch=master)](https://travis-ci.com/looker-open-source/Themis)
+[![Build Status](https://github.com/actions/looker-open-source/themis/workflows/.github/workflows/testing-themis.yml/badge.svg)]
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
-
+[![CodeFactor](https://www.codefactor.io/repository/github/looker-open-source/themis/badge)](https://www.codefactor.io/repository/github/looker-open-source/themis)
 Themis is an open source tool to automate health reporting and bring order in your Looker instance. 
 
 With Themis, your admins and developers now have a report of issues in the instance that require your attention!
