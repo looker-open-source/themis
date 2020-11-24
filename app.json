@@ -1,0 +1,33 @@
+{
+  "name": "Themis for Looker",
+  "description": "A tool for Looker, to find what needs fixing!",
+  "repository": "https://github.com/llooker/themis",
+  "logo": "https://github.com/llooker/themis/blob/master/docs/img/themis.jpg",
+  "keywords": ["looker","bi","analytics","google","data","python","database"],
+  "env": {
+    "SENDGRID_API_KEY": {
+      "description": "A SendGrid API key (find it on https://app.sendgrid.com/settings/api_keys)",
+      "required": true
+    },
+    "EMAIL_RECIPIENTS": {
+      "description": "An email address or list of email address for the users to receive the report",
+      "required": true
+    },
+    "FULL_LOOKML_VALIDATION": {
+      "description": "A True or False value to set the validation all LookML (default is False)",
+      "required": false
+    },
+    "LOOKERSDK_BASE_URL": {
+      "description": "The base URL for the Looker instance (if not using the looker.ini file) eg: `https://COMPANY.looker.com:19999`",
+      "required": false
+    },
+    "LOOKERSDK_CLIENT_ID": {
+      "description": "The API3 ID for the API user (https://docs.looker.com/admin-options/settings/users#api3_keys)",
+      "required": false
+    },
+    "LOOKERSDK_CLIENT_SECRET": {
+      "description": "The API3 Secret for the API user (https://docs.looker.com/admin-options/settings/users#api3_keys)",
+      "required": false
+    }
+  }
+}

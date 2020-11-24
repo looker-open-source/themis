@@ -1,0 +1,7 @@
+cattrs==1.0.0
+sendgrid==6.1.0
+jinja2==2.10.3
+WeasyPrint==51
+requests==2.22.0
+looker-sdk==0.1.3b14
+pytest==6.1.0

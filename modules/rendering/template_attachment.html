@@ -1,0 +1,79 @@
+<head></head>
+<body>
+<font face="arial, serif" size="3">
+    <font color="darkgrey" size="6">Today's Report:</font><br><br>
+    <img height="25" width="25" src="https://looker.com/assets/img/images/favicons2/favicon-32x32.png"> Looker instance: {{ looker_url }}
+    <br>
+    <img height="25" width="25" src="https://looker.com/assets/img/images/favicons2/favicon-32x32.png"> Looker version: {{ looker_version }}
+    <br>
+    <br><img height="30" width="30" src="https://img.icons8.com/ios/50/000000/socrates.png"> <strong><font color="darkgrey" size="6"> Users Summary</font></strong><br>
+    <b>{{ total_users }} Users in the instance.</b> <a href={{looker_url}}/admin/users>[See Them...]</a><br>
+    {% for user in user_details %}
+            {{ user }}<br>
+        {% endfor %}
+    <hr>
+    <br><img height="30" width="30" src="https://img.icons8.com/cotton/64/000000/greek-pillar-base.png"> <strong><font color="darkgrey" size="6"> Projects LookML Validation</font></strong><br>
+        {{ total_projects }} projects in the instance.
+    <hr>
+    <br><img height="30" width="30" src="https://img.icons8.com/ios/64/000000/greek-helmet.png"> <strong><font color="darkgrey" size="6"> Content Validation</font></strong><br>
+        {{ total_erring_content }} content with errors in the instance.<br>
+        <b>Errors for Looks</b>:<br>
+        {{ total_look_errors }} Looks failed Content Validation <a href={{looker_url}}/content_validator>[Fix Them...]</a><br>
+        {% for item in look_errors %}
+            <li>{{ item }}</li>
+        {% endfor %}<br><br>
+        <b>Errors for Dashboards</b>:<br>
+        {{ total_dash_errors }} Dashboards failed Content Validation <a href={{looker_url}}/content_validator>[Fix Them...]</a><br>
+        {% for item in dashboards_errors %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    <hr>
+    <br><img height="30" width="30" src="https://img.icons8.com/wired/50/000000/in-transit.png"> <strong><font color="darkgrey" size="6"> Schedules</font></strong><br>
+        <b>{{ total_schedules }} failing schedules in the instance. </b><a href={{looker_url}}/admin/scheduled_jobs>[See Them...]</a><br>
+        {% for item in list_errors_schedules %}
+                <li>{{ item }}</li>
+            {% endfor %}
+    <hr>
+    <br><img height="30" width="30" src="https://img.icons8.com/metro/26/000000/table-1.png"> <strong><font color="darkgrey" size="6"> PDTs</font></strong><br>
+        <b>{{ total_pdt_errors }} PDTs failures in the instance. </b><a href={{looker_url}}/admin/pdts>[See Them...]</a><br>
+        {% for item in list_pdt_errors %}
+                <li>{{ item }}</li>
+            {% endfor %}
+    <hr>
+    <br><img height="30" width="30" src="https://img.icons8.com/pastel-glyph/64/000000/speedometer.png"> <strong><font color="darkgrey" size="6"> Performance</font></strong><br>
+        <b>{{ unlimited_queries }}. </b><a href={{report_url}}>[See Them...]</a><br>
+        <br>
+        {% if is_clustered %}
+            {% for item in list_nodes %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        {% else %}
+            The instance has one node.
+        {% endif %}
+    <hr>
+    <br><img height="30" width="30" src="https://img.icons8.com/wired/64/000000/database-restore.png"> <strong><font color="darkgrey" size="6"> Databases</font></strong><br>
+        <b>{{ total_connections }} connections in the instance. </b><a href={{looker_url}}/admin/connections>[See Them...]</a><br>
+            {% for item in list_errors_connections %}
+                <li>{{ item }}</li>
+            {% endfor %}
+    <hr>
+    <br><img height="30" width="30" src="https://img.icons8.com/ios/50/000000/decentralized-network.png"> <strong><font color="darkgrey" size="6"> Connectivity</font></strong><br>
+        <b>{{ total_integrations }} integrations in the instance. </b><a href={{looker_url}}/admin/actions>[See Them...]</a><br>
+            {% for item in list_errors_integrations %}
+                <li>{{ item }}</li>
+            {% endfor %}
+
+        <b>{{ total_datagroups }} datagroups in the instance. </b><a href={{looker_url}}/admin/datagroups>[See Them...]</a><br>
+            {% for item in list_errors_datagroups %}
+                <li>{{ item }}</li>
+            {% endfor %}
+    <br><br>
+    <font color="#5a748d" size="1">
+        Find more information <a href="https://github.com/llooker/themis">go to the repo</a>
+    <br>
+        Something Wrong? <a href="https://github.com/llooker/themis/issues">Tell us</a>
+    <br>
+        All icons provided by Icons8: https://icons8.com
+    </font>
+</font>
+</body>
