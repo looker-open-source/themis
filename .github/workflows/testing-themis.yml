@@ -1,4 +1,4 @@
-name: Python Themis testing
+name: Build Status
 
 on: [push]
 
