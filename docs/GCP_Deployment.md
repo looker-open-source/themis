@@ -27,7 +27,7 @@ Thanks for using Themis, below is the 11 step list to getting it working!
 - `$ pip3 --version`  Confirm pip3 was installed
 
 8. Set up the Repo & dependencies
-- `$ git clone https://github.com/llooker/themis.git`  Clone the Themis repo
+- `$ git clone https://github.com/looker-open-source/themis.git`  Clone the Themis repo
 - `$ cd Themis`  Navigate into the directory
 - `$ pip3 install -r requirements.txt`  Install the dependencies
 - `$ sudo apt-get install build-essential python3-dev python3-pip python3-setuptools python3-wheel python3-cffi libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info` Install dependencies for the rendering package for the PDF report

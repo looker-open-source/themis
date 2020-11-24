@@ -1,8 +1,8 @@
 {
   "name": "Themis for Looker",
   "description": "A tool for Looker, to find what needs fixing!",
-  "repository": "https://github.com/llooker/themis",
-  "logo": "https://github.com/llooker/themis/blob/master/docs/img/themis.jpg",
+  "repository": "https://github.com/looker-open-source/themis",
+  "logo": "https://github.com/looker-open-source/themis/blob/master/docs/img/themis.jpg",
   "keywords": ["looker","bi","analytics","google","data","python","database"],
   "env": {
     "SENDGRID_API_KEY": {

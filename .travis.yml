@@ -1,0 +1,16 @@
+language: python
+python:
+  - '3.6'
+  - '3.7'
+  - '3.8'
+before_install:
+  - sudo apt-get install build-essential python3-dev python3-pip python3-setuptools python3-wheel python3-cffi libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info
+install:
+  - pip install -r requirements.txt
+# 'python' points to Python 2.7 on macOS but points to Python 3.8 on Linux and Windows
+# 'python3' is a 'command not found' error on Windows but 'py' works on Windows only
+script: 
+- pytest tests/test_setup.py 
+- pytest tests/test_general.py 
+- pytest tests/test_send_email.py
+- python3 main.py  || python main.py

@@ -1,0 +1,36 @@
+# SDK cred #
+############
+looker.ini
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+modules/__pycache__/*
+modules/__pycache__/*.pyc
+modules/.DS_Store
+tests/__pycache__/*
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS generated files #
+######################
+.DS_Store
+modules/.DS_Store
+*modules/.DS_Store
+*Pipfile*
+.idea/

@@ -33,8 +33,8 @@ class SendEmailTestCase(unittest.TestCase):
                     30 datagroups in the instance.<br>
                 <br><br>
                 <font color="grey" size="1">
-                    Find more information <a href="https://github.com/llooker/Themis">go to the repo</a>
+                    Find more information <a href="https://github.com/looker-open-source/Themis">go to the repo</a>
                 <br>
-                    Something Wrong? <a href="https://github.com/llooker/Themis">Tell us</a>
+                    Something Wrong? <a href="https://github.com/looker-open-source/Themis">Tell us</a>
                 </font>'''
         self.assertEqual(results, data, msg="Issue formatting email body")

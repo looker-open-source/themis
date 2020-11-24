@@ -1,5 +1,5 @@
 # Themis
-[![Build Status](https://travis-ci.com/llooker/Themis.svg?token=9AQVD3a9aH85bqC19gfz&branch=master)](https://travis-ci.com/llooker/Themis)
+[![Build Status](https://travis-ci.com/looker-open-source/Themis.svg?token=9AQVD3a9aH85bqC19gfz&branch=master)](https://travis-ci.com/looker-open-source/Themis)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 Themis is an open source tool to automate health reporting and bring order in your Looker instance. 
@@ -10,7 +10,7 @@ With Themis, your admins and developers now have a report of issues in the insta
 
 
 ### Status and Support
-Themis is NOT supported or warranted by Looker in any way. Please do not contact Looker support for issues with Themis. Questions and discussions can be logged via https://github.com/llooker/themis/issues 
+Themis is NOT supported or warranted by Looker in any way. Please do not contact Looker support for issues with Themis. Questions and discussions can be logged via https://github.com/looker-open-source/themis/issues 
 
 
 ----------
@@ -36,7 +36,7 @@ Themis is NOT supported or warranted by Looker in any way. Please do not contact
 | Users      | Get LockedOut Users     |    ✅  |
 | Users      | Get Inactive Users     |    ✅  |
 
->Not seeing a feature you'd like? [File a Feature Request!](https://github.com/llooker/themis/issues/new)
+>Not seeing a feature you'd like? [File a Feature Request!](https://github.com/looker-open-source/themis/issues/new)
 
 ### Requirements
 
@@ -86,7 +86,7 @@ We suggest creating a Looker API user specifically for Themis, and using that us
 
 Pull Requests are welcome – we'd love to have help expanding Themis' coverage of Looker features and use cases!
 
-If you have any trouble with the application, please [open an issue](https://github.com/llooker/themis/issues/new) on this repo so we can have a look!
+If you have any trouble with the application, please [open an issue](https://github.com/looker-open-source/themis/issues/new) on this repo so we can have a look!
 Please remember to exclude any sensitive information on the issues filed.
 
 
