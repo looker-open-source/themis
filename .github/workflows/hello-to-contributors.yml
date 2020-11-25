@@ -1,5 +1,4 @@
-name: Auto message for new PR's and Issues
-description: Automatically send hello message to the first PR and Issue for new contributor.
+name: Message for PRs and Issues
 branding:
   icon: message-square
   color: yellow
