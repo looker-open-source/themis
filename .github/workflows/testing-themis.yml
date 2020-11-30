@@ -24,7 +24,7 @@ jobs:
     - name: Test with pytest
       env:
         SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-        EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+        THEMIS_EMAIL_RECIPIENTS: ${{ secrets.THEMIS_EMAIL_RECIPIENTS }}
         LOOKERSDK_BASE_URL: ${{ secrets.LOOKERSDK_BASE_URL }}
         LOOKERSDK_CLIENT_ID: ${{ secrets.LOOKERSDK_CLIENT_ID }}
         LOOKERSDK_CLIENT_SECRET: ${{ secrets.LOOKERSDK_CLIENT_SECRET }}
@@ -33,7 +33,7 @@ jobs:
     - name: Run Themis application
       env:
         SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-        EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+        THEMIS_EMAIL_RECIPIENTS: ${{ secrets.THEMIS_EMAIL_RECIPIENTS }}
         LOOKERSDK_BASE_URL: ${{ secrets.LOOKERSDK_BASE_URL }}
         LOOKERSDK_CLIENT_ID: ${{ secrets.LOOKERSDK_CLIENT_ID }}
         LOOKERSDK_CLIENT_SECRET: ${{ secrets.LOOKERSDK_CLIENT_SECRET }}

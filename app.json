@@ -9,11 +9,11 @@
       "description": "A SendGrid API key (find it on https://app.sendgrid.com/settings/api_keys)",
       "required": true
     },
-    "EMAIL_RECIPIENTS": {
+    "THEMIS_EMAIL_RECIPIENTS": {
       "description": "An email address or list of email address for the users to receive the report",
       "required": true
     },
-    "FULL_LOOKML_VALIDATION": {
+    "THEMIS_FULL_LOOKML_VALIDATION": {
       "description": "A True or False value to set the validation all LookML (default is False)",
       "required": false
     },

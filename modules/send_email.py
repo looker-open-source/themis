@@ -12,12 +12,12 @@ def send_report_out(content):
     '''Processes the email content and sends it to recipients thru SendGrid'''
     try:
       # format env variable like: 'example1@mail.com,example2@mail.com'
-        email_list = os.environ.get('EMAIL_RECIPIENTS')
+        email_list = os.environ.get('THEMIS_EMAIL_RECIPIENTS')
         to_emails = []
         for email in email_list.split(','):
           to_emails.append(email)
     except Exception as e:
-        print("Missing EMAIL_RECIPIENTS Variables {}".format(e))
+        print("Missing THEMIS_EMAIL_RECIPIENTS Variables {}".format(e))
 
     message = Mail(
         from_email = 'themisreport@example.com',
