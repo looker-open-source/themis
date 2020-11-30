@@ -34,7 +34,7 @@ Thanks for using Themis, below is the 11 step list to getting it working!
 
 9. Set up the script variables
 - `$ vi looker.ini`  Create the Looker file for authentication
-- Setting Up Env Var Create environment variables for SENDGRID_API_KEY and EMAIL_RECIPIENTS 
+- Setting Up Env Var Create environment variables for SENDGRID_API_KEY and THEMIS_EMAIL_RECIPIENTS 
 
 10. Run the application
 - `$ python3 main.py`	Runs the application

@@ -72,7 +72,7 @@ The application variables for Looker can be configured using the looker.ini file
 
 - `SENDGRID_API_KEY` API key for [SendGrid to send report email](https://app.sendgrid.com/login?redirect_to=%2Fsettings%2Fapi_keys)
 
-- `EMAIL_RECIPIENTS` the list of users that receive Themis' report
+- `THEMIS_EMAIL_RECIPIENTS` the list of users that receive Themis' report
 
 ----------
 

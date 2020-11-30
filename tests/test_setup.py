@@ -7,7 +7,7 @@ class LookerSDKTestCase(unittest.TestCase):
     base_url = os.environ.get('LOOKERSDK_BASE_URL')
     api_id = os.environ.get('LOOKERSDK_CLIENT_ID')
     api_secret = os.environ.get('LOOKERSDK_CLIENT_SECRET')
-    email_list = os.environ.get('EMAIL_RECIPIENTS')
+    email_list = os.environ.get('THEMIS_EMAIL_RECIPIENTS')
     sg_key = os.environ.get('SENDGRID_API_KEY')
 
     def test_looker_credentials(self):
