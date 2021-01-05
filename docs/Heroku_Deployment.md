@@ -2,7 +2,7 @@
 
 Thanks for using Themis, below is the 11 step list to getting it working!
 
-1. [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/looker-open-source/themis/tree/master)
+1. [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/looker-open-source/themis/tree/main)
 
 2. On the configuation page enter a unique name for the application and input the variables listed on the page. (If you are not using a `looker.ini` file for Looker authentication, you will need to input values for the 3 LOOKERSDK config vars). Below is an example of the process using fake values
 
