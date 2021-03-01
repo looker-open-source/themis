@@ -1,4 +1,4 @@
-![Themis banner](/docs/img/themis_banner.jpg)
+![Themis banner](/docs/img/themis_banner.png)
 
 [![Build Status](https://github.com/looker-open-source/themis/workflows/Build%20Status/badge.svg)](https://github.com/looker-open-source/themis/actions)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
