@@ -1,5 +1,6 @@
 import jinja2
-from weasyprint import HTML, CSS
+from weasyprint import HTML
+from weasyprint import CSS
 
 
 def email_body(looker_url, looker_version, total_users, total_projects, 

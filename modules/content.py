@@ -1,21 +1,22 @@
 import re
+from typing import Tuple
 from loguru import logger
 
 class Content:
     
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     return 'CONTENT IN LOOKER'
 
-  def __init__(self, looker_client):
+  def __init__(self, looker_client) -> None:
     self.looker_client = looker_client
 
-  def count_all_errors(self):
+  def count_all_errors(self) -> int:
     '''Counts errors from Content Validator'''
     '''todo de-duplicate this call to use the validate_content results adding DashErrors and LookErrors'''
     return len(self.looker_client.content_validation().content_with_errors)
 
-  def validate_content(self):
+  def validate_content(self) -> Tuple[str, str, int, int]:
     '''Runs the Content Validator and returns failures'''
     error = self.looker_client.content_validation().content_with_errors
     looks_error, dash_errors = [], []
@@ -39,6 +40,6 @@ class Content:
     total_dash_errors = len(dash_errors)
     return looks_error, dash_errors, total_look_errors, total_dash_errors
 
-  def validate_themes(self):
+  def validate_themes(self) -> None:
     '''Confirms existing themes are valid'''
     # todo https://company.looker.com:19999/api-docs/index.html#!/4.0/Theme/validate_theme

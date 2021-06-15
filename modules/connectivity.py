@@ -1,22 +1,23 @@
-import re
+from typing import List
 from loguru import logger
-# import threading
+from looker_sdk.sdk.api40 import methods
+
 
 class Connectivity:
 
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     return 'CONNECTIVITY IN LOOKER'
 
-  def __init__(self, looker_client):
+  def __init__(self, looker_client: methods.Looker40SDK) -> None:
     self.looker_client = looker_client
 
-  def count_all_connections(self):
+  def count_all_connections(self) -> int:
     '''Gets the number of connections defined'''
     # todo confirm if this include internal connections and remove looker connection
     return len(self.looker_client.all_connections(fields='id'))
 
-  def test_db_connections(self):
+  def test_db_connections(self) -> List[str]:
     '''Test the connections and returns failures'''
     # todo if _connect_ fails no need to run other tests + add threading for connections
     all_connections = self.looker_client.all_connections(
@@ -44,11 +45,11 @@ class Connectivity:
                   connection.name, e))
     return db_errors
 
-  def count_all_integrations(self):
+  def count_all_integrations(self) -> int:
     '''Gets the number of integrations set up'''
     return len(self.looker_client.all_integrations(fields='id'))
 
-  def test_integrations(self):
+  def test_integrations(self) -> List[str]:
     '''Tests the integrations and returns failures'''
     all_integrations = self.looker_client.all_integrations(fields='id, label, enabled')
     integration_errors = []
@@ -74,11 +75,11 @@ class Connectivity:
         pass
     return integration_errors
 
-  def count_all_datagroups(self):
+  def count_all_datagroups(self) -> int:
     '''Gets the number of datagroups defined'''
     return len(self.looker_client.all_datagroups())
 
-  def test_datagroups(self):
+  def test_datagroups(self) -> List[str]:
     '''Tests the datagroups and returns failures'''
     all_datagroups = self.looker_client.all_datagroups()
     group_errors = []

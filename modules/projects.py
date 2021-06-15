@@ -1,21 +1,24 @@
 import datetime
+from typing import List, Tuple
+from looker_sdk.sdk.api40 import methods
+
 
 class Projects:
     
 
   lookmlErrorCount = 0
   
-  def __repr__(self):
+  def __repr__(self) -> str:
     return 'PROJECTS IN LOOKER'
 
-  def __init__(self, looker_client):
+  def __init__(self, looker_client: methods.Looker40SDK) -> None:
     self.looker_client = looker_client
 
-  def count_all_projects(self):
+  def count_all_projects(self) -> int:
     '''Returns the number of projects'''
     return len(self.looker_client.all_projects(fields='id'))
 
-  def all_projects(self):
+  def all_projects(self) -> List[str]:
     '''Returns the list of projects'''
     my_projects = self.looker_client.all_projects(fields='id,name')
     project_ids = []
@@ -23,7 +26,7 @@ class Projects:
       project_ids.append(my_projects[i].id)
     return project_ids
 
-  def validate_lookml(self, project_id):
+  def validate_lookml(self, project_id) -> Tuple[str, str]:
     '''Returns LookML validation errors'''
     validation = self.looker_client.validate_project(project_id)
     if validation.errors:
@@ -34,11 +37,11 @@ class Projects:
       return severity, message
 
   @staticmethod
-  def count_lookml_errors():
+  def count_lookml_errors() -> int:
     '''Returns the number of validation issues'''
     return Projects.lookmlErrorCount
 
-  def run_git_test(self, project_id):
+  def run_git_test(self, project_id) -> List[str]:
     '''Runs the git tests and returns the test failures'''
     # need to change session to 'dev'
     self.looker_client.update_session({"workspace_id":"dev"})
@@ -61,7 +64,7 @@ class Projects:
     self.looker_client.update_session({"workspace_id": "production"})
     return git_tests
 
-  def get_stale_branches(self, project_id):
+  def get_stale_branches(self, project_id) -> List[str]:
     '''Returns the base URL for the Looker instance'''
     # https://help.github.com/en/github/administering-a-repository/viewing-branches-in-your-repository
     all_branches = self.looker_client.all_git_branches(project_id)
@@ -75,11 +78,11 @@ class Projects:
     if stale_branches:
       return stale_branches
 
-  def get_lookml_test(self, project_id):
+  def get_lookml_test(self, project_id) -> bool:
     '''Finds the LookML tests'''
     return self.looker_client.all_lookml_tests(project_id) != '[]'
 
-  def run_lookml_test(self, project_id):
+  def run_lookml_test(self, project_id) -> str:
     '''Runs the LookML tests'''
     results = self.looker_client.run_lookml_test(project_id)
     if not results:

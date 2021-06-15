@@ -1,10 +1,12 @@
+from looker_sdk.sdk.api40 import methods
+from looker_sdk.sdk.api40 import models
 
 class Users:
     
     def __repr__(self):
         return 'USERS IN LOOKER'
 
-    def __init__(self, looker_client):
+    def __init__(self, looker_client: methods.Looker40SDK):
         self.looker_client = looker_client
 
     def validate_api_creds(self):

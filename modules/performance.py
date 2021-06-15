@@ -1,17 +1,20 @@
 import json
+from typing import Tuple, List
 from collections import Counter
-from looker_sdk import models40 as models
+from looker_sdk.sdk.api40 import methods
+from looker_sdk.sdk.api40 import methods
+
 
 class Performance:
 	
 	
-	def __repr__(self):
+	def __repr__(self) -> str:
 		return 'PERFORMANCE IN LOOKER'
 	
-	def __init__(self, looker_client):
+	def __init__(self, looker_client: methods.Looker40SDK) -> None:
 		self.looker_client = looker_client
 
-	def unlimited_downloads(self):
+	def unlimited_downloads(self) -> Tuple[str, list[str]]:
 		'''Returns unlimited downloads'''
 		body = models.WriteQuery(
 			model = "system__activity",
@@ -33,18 +36,24 @@ class Performance:
 			limit = "500"
 		)
 		unltd_downloads = self.looker_client.create_query(body)
-		unlimited_downloads = self.looker_client.run_query(unltd_downloads.id, result_format='json')
+		unlimited_downloads = self.looker_client.run_query(unltd_downloads.id, 
+																										result_format='json'
+																										)
 		if unlimited_downloads:
 			unltd_source, unltd_users = [], []
 			for unltd_query in json.loads(unlimited_downloads):
 				unltd_source.append(unltd_query['history.source'])
 				unltd_users.append(unltd_query['user.id'])
-			results = "{} users have ran queries with more than 5000 rows from these sources: {}".format(len(list(set(unltd_users))), list(set(unltd_source)))
+			results = "{} users have ran queries with more than 5000 rows \
+								from these sources: {}".format(
+									len(list(set(unltd_users))), 
+									list(set(unltd_source))
+								)
 			return results, unltd_downloads.share_url
 		else:
 			return None, unltd_downloads.share_url
 
-	def check_if_clustered(self):
+	def check_if_clustered(self) -> bool:
 		'''Check is Looker is clustered settup'''
 		body = models.WriteQuery(
 			model = "system__activity",
@@ -60,9 +69,9 @@ class Performance:
 		node_is_cluster = []
 		for node in json.loads(check_clustered):
 			node_is_cluster.append(node['node.clustered'])
-		return nodes_count > 1 and list(set(node_is_cluster))[0] == "Yes" #, len(node_is_cluster)
+		return nodes_count > 1 and list(set(node_is_cluster))[0] == "Yes"
 
-	def nodes_matching(self):
+	def nodes_matching(self) -> List[str]:
 		'''For clusters, checks nodes are on same version'''
 		body = models.WriteQuery(
 			model = "system__activity",

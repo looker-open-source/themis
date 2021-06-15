@@ -1,19 +1,21 @@
 import json
-from looker_sdk import models40 as models
+from looker_sdk.sdk.api40 import methods
+from looker_sdk.sdk.api40 import methods
+from typing import Tuple
 
 class Schedules:
     
-  def __repr__(self):
+  def __repr__(self) -> str:
     return 'SCHEDULES IN LOOKER'
 
-  def __init__(self, looker_client):
+  def __init__(self, looker_client: methods.Looker40SDK) -> None:
     self.looker_client = looker_client
 
-  def count_all_schedules(self):
+  def count_all_schedules(self) -> int:
     '''Counts number of schedules'''
     return len(self.looker_client.all_scheduled_plans(fields='id', all_users=True))
 
-  def get_failed_schedules(self):
+  def get_failed_schedules(self) -> Tuple[str, int]:
     '''Finds failed email schedules'''
     body = models.WriteQuery(
         model = "system__activity",
@@ -39,20 +41,24 @@ class Schedules:
     failed_schedules = self.looker_client.run_query(schedules_query.id, result_format='json')
     cleaned_errors = []
     for elem in json.loads(failed_schedules):
-      cleaned_errors.append("Schedule \'{}\' failed to send to {}".format(elem['scheduled_job.name'], elem['scheduled_plan_destination.type']))
+      cleaned_errors.append("Schedule \'{}\' failed to send to {}".format(
+                            elem['scheduled_job.name'], 
+                            elem['scheduled_plan_destination.type'])
+                            )
     if failed_schedules:
       cleaned_errors = list(set(cleaned_errors)) # set to remove duplicates
       return cleaned_errors, len(json.loads(failed_schedules))
     else:
       return None,0
 
-  def get_pdts_status(self):
+  def get_pdts_status(self) -> Tuple[str, int]:
     '''Finds PDTs with issues'''
     body = models.WriteQuery(
         model = "system__activity",
         view = "pdt_event_log",
         fields = ["pdt_event_log.view_name", "pdt_event_log.connection"],
-        filters = {"pdt_event_log.action": "%error%", "pdt_event_log.created_time": "24 hours"},
+        filters = {"pdt_event_log.action": "%error%", 
+                   "pdt_event_log.created_time": "24 hours"},
         sorts = ["pdt_event_log.connection"],
         limit = "5000"
     )
@@ -60,14 +66,17 @@ class Schedules:
     failed_pdts_list = self.looker_client.run_query(failed_pdts.id, result_format='json')
     cleaned_errors = []
     for elem in json.loads(failed_pdts_list):
-      cleaned_errors.append("PDT \'{}\' failed on connection: {}".format(elem['pdt_event_log.view_name'], elem['pdt_event_log.connection']))
+      cleaned_errors.append("PDT \'{}\' failed on connection: {}".format(
+                            elem['pdt_event_log.view_name'], 
+                            elem['pdt_event_log.connection'])
+                            )
     if failed_pdts_list:
       cleaned_errors = list(set(cleaned_errors)) # set to remove duplicates
       return cleaned_errors, len(json.loads(failed_pdts_list))
     else:
       return None,0
 
-  def get_pdts_buildtimes(self): 
+  def get_pdts_buildtimes(self) -> Tuple[int, int, int]: 
     '''Finds PDTs Build Times'''
     body = models.WriteQuery(
         model = "system__activity",
