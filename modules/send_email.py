@@ -2,9 +2,14 @@
 from datetime import date
 import base64
 import os
-from sendgrid.helpers.mail import (
-    Mail, Attachment, FileContent, FileName,
-    FileType, Disposition, ContentId)
+from loguru import logger
+from sendgrid.helpers.mail import Mail
+from sendgrid.helpers.mail import Attachment
+from sendgrid.helpers.mail import FileContent
+from sendgrid.helpers.mail import FileName
+from sendgrid.helpers.mail import FileType
+from sendgrid.helpers.mail import Disposition
+from sendgrid.helpers.mail import ContentId
 from sendgrid import SendGridAPIClient
 
 
@@ -17,7 +22,7 @@ def send_report_out(content):
         for email in email_list.split(','):
           to_emails.append(email)
     except Exception as e:
-        print("Missing THEMIS_EMAIL_RECIPIENTS Variables {}".format(e))
+        logger.error('Missing THEMIS_EMAIL_RECIPIENTS Variables {}'.format(e))
 
     message = Mail(
         from_email = 'themisreport@example.com',
@@ -37,7 +42,7 @@ def send_report_out(content):
     filename = "themis_details_{}".format(date.today().strftime("%Y%m%d"))
     attachment.file_name = FileName(filename)
     attachment.disposition = Disposition('attachment')
-    attachment.content_id = ContentId('Example Content ID')
+    attachment.content_id = ContentId('Themis Report')
     message.attachment = attachment
 
     try:

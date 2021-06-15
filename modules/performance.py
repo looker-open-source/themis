@@ -3,8 +3,11 @@ from collections import Counter
 from looker_sdk import models40 as models
 
 class Performance:
-	'PERFORMANCE IN LOOKER'
-
+	
+	
+	def __repr__(self):
+		return 'PERFORMANCE IN LOOKER'
+	
 	def __init__(self, looker_client):
 		self.looker_client = looker_client
 
@@ -22,9 +25,9 @@ class Performance:
 				"query.limit"
 			],
 			filters = {
-    			"history.created_time": "24 hours",
-    			"history.source": "-regenerator,-suggest",
-    			"query.limit": ">5000"
+					"history.created_time": "24 hours",
+					"history.source": "-regenerator,-suggest",
+					"query.limit": ">5000"
 			},
 			sorts = ["history.created_time desc"],
 			limit = "500"
@@ -57,8 +60,7 @@ class Performance:
 		node_is_cluster = []
 		for node in json.loads(check_clustered):
 			node_is_cluster.append(node['node.clustered'])
-		is_clustered =  nodes_count > 1 and list(set(node_is_cluster))[0] == "Yes"
-		return is_clustered #, len(node_is_cluster)
+		return nodes_count > 1 and list(set(node_is_cluster))[0] == "Yes" #, len(node_is_cluster)
 
 	def nodes_matching(self):
 		'''For clusters, checks nodes are on same version'''

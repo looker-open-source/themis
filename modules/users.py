@@ -1,6 +1,8 @@
 
 class Users:
-    'USERS IN LOOKER'
+    
+    def __repr__(self):
+        return 'USERS IN LOOKER'
 
     def __init__(self, looker_client):
         self.looker_client = looker_client
