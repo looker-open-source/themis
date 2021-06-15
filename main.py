@@ -1,6 +1,6 @@
-import time
 import os, os.path
 from requests.exceptions import ReadTimeout
+from loguru import logger
 import setup
 
 # modules calling the Looker API to get results
@@ -31,10 +31,10 @@ else:
         looker_client = setup.configure_sdk(config_file="looker.ini")
         api_user = Users(looker_client)
     except Exception as e: 
-        print("Missing Environment Variables {}".format(e))
+        logger.error('Missing Environment Variables {}'.format(e))
 
 if not api_user.validate_api_creds():
-    print("Ensure API credentials have Admin role...")
+    logger.error('Ensure API credentials have Admin role.')
     exit(0)
 
 # Timing program
@@ -42,12 +42,12 @@ start_time = time.time()
 
 looker_version = get_looker_version(looker_client)
 looker_url = get_looker_instance()
-print("> Checking instance: {}".format(looker_url))
+logger.info('Checking instance: {}'.format(looker_url))
 
 # USERS
 all_users = api_user.count_all_users()
 user_issue_details = api_user.get_users_issue()
-print(">>> Checked: {} in {} sec so far".format(Users.__doc__, round(time.time()-start_time, 4)))
+logger.info('Checked: {}'.format(Users.__doc__))
 ####################################################################
 
 # PROJECTS
@@ -55,6 +55,7 @@ my_project = Projects(looker_client)
 count_all_projects = my_project.count_all_projects()
 
 all_projects = my_project.all_projects()  # to reuse throughout code
+logger.info('Checked: {}'.format(Projects.__doc__))
 ####################################################################
 
 # CONTENT
@@ -67,7 +68,7 @@ look_errors = format_output(content_errors[0])
 
 total_dash_errors = content_errors[3]
 dashboards_errors = format_output(content_errors[1])
-print(">>> Checked: {} in {} sec so far".format(Content.__doc__, round(time.time()-start_time, 4)))
+logger.info('Checked: {}'.format(Content.__doc__))
 ####################################################################
 
 # SCHEDULES
@@ -82,7 +83,7 @@ count_pdt_errors = all_pdt_errors[1]
 pdt_errors = format_output(all_pdt_errors[0])
 
 pdt_build_times = my_schedule.get_pdts_buildtimes()
-print(">>> Checked: {} in {} sec so far".format(Schedules.__doc__, round(time.time()-start_time, 4)))
+logger.info('Checked: {}'.format(Schedules.__doc__))
 ####################################################################
 
 # PERFORMANCE
@@ -99,7 +100,7 @@ if is_instance_clustered:
 else:
     list_nodes = [None]
     
-print(">>> Checked: {} in {} sec so far".format(Performance.__doc__, round(time.time()-start_time, 4)))
+logger.info('Checked: {}'.format(Performance.__doc__))
 ####################################################################
 
 # CONNECTIVITY
@@ -116,7 +117,7 @@ integration_errors = format_output(all_integration_errors)
 count_datagroups = my_connective.count_all_datagroups()
 all_datagroup_errors = my_connective.test_datagroups()
 datagroup_errors = format_output(all_datagroup_errors)
-print(">>> Checked: {} in {} sec so far".format(Connectivity.__doc__, round(time.time()-start_time, 4)))
+logger.info('Checked: {}'.format(Connectivity.__doc__))
 ####################################################################
 
 # create the attachment details for the various items checked (summary + details)
@@ -134,7 +135,7 @@ email_attachment(looker_url = looker_url, looker_version = looker_version,
                  total_integrations = count_integrations, list_errors_integrations = integration_errors,
                  total_datagroups = count_datagroups, list_errors_datagroups = datagroup_errors
                  )
-print(">>> Created email attachment {} sec so far".format(round(time.time()-start_time, 4)))
+logger.info('Created email attachment')
 
 
 # create the body of the email with summary data
@@ -146,9 +147,9 @@ content_email = email_body(looker_url = looker_url, looker_version = looker_vers
                            total_connections = count_connections, total_integrations = count_integrations, 
                            total_datagroups = count_datagroups
                            )
-print(">>> Created email body {} sec so far".format(round(time.time()-start_time, 4)))
+logger.info('Created email body for report')
 
 send_report_out(content=content_email)
-print(">>> Sent email out {} sec so far".format(round(time.time()-start_time, 4)))
+logger.info('Sent email out with report')
 
-print('>>> Completed process in {} seconds '.format(round(time.time()-start_time, 4)))
+logger.success('Completed process in {} seconds')
