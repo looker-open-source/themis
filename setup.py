@@ -4,8 +4,8 @@ from looker_sdk.rtl import api_settings, auth_session, requests_transport, seria
 from looker_sdk.sdk.api40 import methods, models
 
 
-def configure_sdk(config_file):
-    settings = api_settings.ApiSettings(config_file, "Looker")
+def configure_sdk():
+    settings = api_settings.ApiSettings()
     user_agent_tag = f"Themis v1.0"
     settings.headers = {
         "Content-Type": "application/json",
