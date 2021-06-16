@@ -104,12 +104,12 @@ class Connectivity:
       group_errors:  The list of errors for the Looker Datagroups.
     """
     all_datagroups = self.looker_client.all_datagroups()
-    group_errors = []
-    for elem in all_datagroups:
-      if elem.trigger_error:
-        group_errors.append("Datagroup \"{}\" on model \"{}\" has this error:\t{}".format(
+
+    group_errors = [
+        "Datagroup \"{}\" on model \"{}\" has this error:\t{}".format(
                                 elem.name,
                                 elem.model_name,
                                 elem.trigger_error)
-                                )
+        for elem in all_datagroups if elem.trigger_error
+    ]
     return group_errors

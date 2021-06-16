@@ -93,10 +93,6 @@ report_url = test_unlimited_queries[1]
 
 is_instance_clustered = my_performance.check_if_clustered()
 list_nodes = my_performance.nodes_matching() if is_instance_clustered else [None]
-# if is_instance_clustered:
-#     list_nodes = my_performance.nodes_matching()
-# else:
-#     list_nodes = [None]
     
 logger.info('Checked: {}'.format(Performance.__repr__(my_performance)))
 ####################################################################

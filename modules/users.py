@@ -16,20 +16,20 @@ class Users:
     Confirms the user set for Themis has appropriate powers in Looker
     to retrieve all the information from the system. 
 
-	Returns:
+	  Returns:
       A boolean value representing the 'Admin' value in list of roles.
     """
     api_user = self.looker_client.me()
-    all_roles = []
-    for role_id in api_user.role_ids:
-      role = self.looker_client.role(role_id)
-      all_roles.append(role.name.lower() == "admin")
+    all_roles = [
+        self.looker_client.role(role_id).name.lower() == "admin" 
+        for role_id in api_user.role_ids
+    ]
     return True in all_roles
 
   def count_all_users(self) -> int:
     """Retrieves number of users in the Looker instance.
 
-	Returns:
+	  Returns:
       The number of users in the Looker instance.
     """
     return len(self.looker_client.all_users(fields='id'))
@@ -37,17 +37,13 @@ class Users:
   def get_users_issue(self) -> List[str]:
     """Retrieves the locked out users in the Looker instance.
 
-	Returns:
+	  Returns:
       user_results: The list with information on disabled and locked out users.
     """
     all_users = self.looker_client.all_users(fields='id, is_disabled')
-    disabled_users = []
+    disabled_users = [ user for user in all_users if user.is_disabled ]
 
-    for i in all_users:
-      if i.is_disabled:
-        disabled_users.append(i)
-    user_results = []
-    user_results.append("Disabled Looker users: {}".format(len(disabled_users)))
+    user_results = ["Disabled Looker users: {}".format(len(disabled_users))]
     locked_out = self.looker_client.all_user_login_lockouts()
     user_results.append("Locked Out Looker users: {}".format(len(locked_out)))
     return user_results
@@ -55,7 +51,7 @@ class Users:
   def get_inactive_users(self) -> int:
     """Returns users without login data for past 90 days.
 
-	Returns:
+	  Returns:
       len(inactive_users): The number of inactive users in Looker.
     """
     body = models.WriteQuery(
