@@ -6,15 +6,27 @@ from typing import List
 from looker_sdk.sdk.api40 import methods
 
 def get_looker_version(looker_client: methods.Looker40SDK) -> str:
-  '''Returns the version for the Looker instance'''
+  """Checks the version for the Looker instance.
+
+  Returns:
+    The current Looker version for the instance.
+  """
   return looker_client.versions(fields='looker_release_version').looker_release_version
 
 def regex_base_url(url: str) -> str:
-  '''Cleans instance URL from eventual trailing ports in API URL'''
+  """Cleans instance URL from eventual trailing ports in API URL.
+
+  Returns:
+    The instance url without trailing port numbers.
+  """
   return re.sub(r':\d{2,6}.*', '', url)
 
 def get_looker_instance() -> str:
-  '''Returns the base URL for the Looker instance'''
+  """Returns the base URL for the Looker instance.
+
+  Returns:
+    The instance url from user input in configuration.
+  """
   if path.exists("looker.ini"): 
     config = configparser.ConfigParser()
     config.read('looker.ini')
@@ -27,7 +39,11 @@ def get_looker_instance() -> str:
     return instance_url
 
 def format_output(function_results: List[str]) -> List[str]:
-  '''Formats list of errors in Looker to display first 20 elements'''
+  """Formats list of errors in Looker to display first 20 elements.
+
+  Returns:
+    formatted_results: The first 20 error message listed.
+  """
   if isinstance(function_results, (list)):
     if len(function_results) >=1:
       formatted_results = function_results[:20]

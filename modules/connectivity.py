@@ -13,13 +13,19 @@ class Connectivity:
     self.looker_client = looker_client
 
   def count_all_connections(self) -> int:
-    '''Gets the number of connections defined'''
-    # todo confirm if this include internal connections and remove looker connection
-    return len(self.looker_client.all_connections(fields='id'))
+    """Gets the number of connections defined.
+
+    Returns:
+      The number of database connections set in Looker.
+    """
+    return len(self.looker_client.all_connections(fields='name'))
 
   def test_db_connections(self) -> List[str]:
-    '''Test the connections and returns failures'''
-    # todo if _connect_ fails no need to run other tests + add threading for connections
+    """Test the connections and returns failures.
+
+    Returns:
+      db_errors: The list of errors from database connection tests.
+    """
     all_connections = self.looker_client.all_connections(
         fields='name, port, host, dialect(connection_tests, label)'
         )
@@ -40,17 +46,26 @@ class Connectivity:
                             item.name,
                             item.message)
                             )
+                  break
             except Exception as e:
               logger.error('Database Connection test for {} failed due to {}'.format(
                   connection.name, e))
     return db_errors
 
   def count_all_integrations(self) -> int:
-    '''Gets the number of integrations set up'''
+    """Gets the number of integrations set up.
+
+    Returns:
+      The number of integrations set up in Looker.
+    """
     return len(self.looker_client.all_integrations(fields='id'))
 
   def test_integrations(self) -> List[str]:
-    '''Tests the integrations and returns failures'''
+    """Tests the integrations and returns failures.
+
+    Returns:
+      integration_errors: The list of errors from integration tests.
+    """
     all_integrations = self.looker_client.all_integrations(fields='id, label, enabled')
     integration_errors = []
 
@@ -71,16 +86,23 @@ class Connectivity:
               elem.label, e)
               )
       else:
-        # integration_errors.append("Integration {} not enabled.".format(elem.label))
         pass
     return integration_errors
 
   def count_all_datagroups(self) -> int:
-    '''Gets the number of datagroups defined'''
+    """Gets the number of datagroups defined.
+
+    Returns:
+      The number of datagroups defined in Looker.
+    """
     return len(self.looker_client.all_datagroups())
 
   def test_datagroups(self) -> List[str]:
-    '''Tests the datagroups and returns failures'''
+    """Tests the datagroups and returns failures.
+
+    Returns:
+      group_errors:  The list of errors for the Looker Datagroups.
+    """
     all_datagroups = self.looker_client.all_datagroups()
     group_errors = []
     for elem in all_datagroups:

@@ -1,5 +1,5 @@
 import json
-from looker_sdk.sdk.api40 import methods
+from looker_sdk.sdk.api40 import models
 from looker_sdk.sdk.api40 import methods
 from typing import Tuple
 
@@ -12,11 +12,20 @@ class Schedules:
     self.looker_client = looker_client
 
   def count_all_schedules(self) -> int:
-    '''Counts number of schedules'''
+    """Counts number of schedules defined in the instance.
+
+		Returns:
+			The number of existing schedules.
+		"""
     return len(self.looker_client.all_scheduled_plans(fields='id', all_users=True))
 
   def get_failed_schedules(self) -> Tuple[str, int]:
-    '''Finds failed email schedules'''
+    """Finds failed email schedules.
+
+		Returns:
+			cleaned_errors: The list of unique errors found for failing schedules.
+      len(json.loads(failed_schedules)): The number of failed schedules.
+		"""
     body = models.WriteQuery(
         model = "system__activity",
         view = "scheduled_plan",
@@ -49,10 +58,15 @@ class Schedules:
       cleaned_errors = list(set(cleaned_errors)) # set to remove duplicates
       return cleaned_errors, len(json.loads(failed_schedules))
     else:
-      return None,0
+      return None, 0
 
   def get_pdts_status(self) -> Tuple[str, int]:
-    '''Finds PDTs with issues'''
+    """Finds PDTs with issues.
+
+		Returns:
+			cleaned_errors: The list of unique errors found for the PDTs.
+      len(json.loads(failed_pdts_list)): The number of failed PDTs.
+		"""
     body = models.WriteQuery(
         model = "system__activity",
         view = "pdt_event_log",
@@ -74,10 +88,16 @@ class Schedules:
       cleaned_errors = list(set(cleaned_errors)) # set to remove duplicates
       return cleaned_errors, len(json.loads(failed_pdts_list))
     else:
-      return None,0
+      return None, 0
 
   def get_pdts_buildtimes(self) -> Tuple[int, int, int]: 
-    '''Finds PDTs Build Times'''
+    """Bucket PDTs build times into categories.
+
+		Returns:
+			build_less_30: The number of PDTs building in less than 30min.
+      build_30_60: The number of PDTs building between 30 and 60min.
+      build_more_60: The number of PDTs building in more than 60min.
+		"""
     body = models.WriteQuery(
         model = "system__activity",
         view = "pdt_builds",

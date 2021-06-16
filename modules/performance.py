@@ -2,7 +2,7 @@ import json
 from typing import Tuple, List
 from collections import Counter
 from looker_sdk.sdk.api40 import methods
-from looker_sdk.sdk.api40 import methods
+from looker_sdk.sdk.api40 import models
 
 
 class Performance:
@@ -14,8 +14,13 @@ class Performance:
 	def __init__(self, looker_client: methods.Looker40SDK) -> None:
 		self.looker_client = looker_client
 
-	def unlimited_downloads(self) -> Tuple[str, list[str]]:
-		'''Returns unlimited downloads'''
+	def unlimited_downloads(self) -> Tuple[str, str]:
+		"""Returns unlimited downloads information from instance.
+
+		Returns:
+			results: The summary of unlimited results from query.
+			unltd_downloads.share_url: The link to access result in Looker.
+		"""
 		body = models.WriteQuery(
 			model = "system__activity",
 			view = "history",
@@ -54,7 +59,11 @@ class Performance:
 			return None, unltd_downloads.share_url
 
 	def check_if_clustered(self) -> bool:
-		'''Check is Looker is clustered settup'''
+		"""Checks if Looker is using a clustered settup.
+
+		Returns:
+			A boolean value representing whether the instance is clustered.
+		"""
 		body = models.WriteQuery(
 			model = "system__activity",
 			view = "history",
@@ -72,7 +81,11 @@ class Performance:
 		return nodes_count > 1 and list(set(node_is_cluster))[0] == "Yes"
 
 	def nodes_matching(self) -> List[str]:
-		'''For clusters, checks nodes are on same version'''
+		"""For clusters, checks if the nodes are on same Looker version.
+
+		Returns:
+			diff_node_version: The list with information aobut nodes and versions.
+		"""
 		body = models.WriteQuery(
 			model = "system__activity",
 			view = "history",
