@@ -21,6 +21,7 @@ from modules.send_email import send_report_out
 if path.exists("looker.ini"): 
     looker_client = setup.configure_sdk()
     api_user = Users(looker_client)
+    logger.info("Found looker.ini file in the directory.")
 # use environment variable instead 
 else:
     try:
@@ -30,6 +31,7 @@ else:
         LOOKERSDK_CLIENT_SECRET = os.environ.get('LOOKERSDK_CLIENT_SECRET')
         looker_client = setup.configure_sdk()
         api_user = Users(looker_client)
+        logger.info("Found Looker ENV VAR in the system.")
     except Exception as e: 
         logger.error('Missing Environment Variables {}'.format(e))
 
